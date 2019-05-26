@@ -1,0 +1,148 @@
+@import 'https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css';
+@import 'https://fonts.googleapis.com/css?family=Roboto:700,400';
+
+body {
+    background: #E0FFFF;
+    color: #000000;
+    margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+}
+
+ul {
+    margin: 0;
+}
+
+.bg-steel {
+    background-color: #000000;
+}
+
+.site-header .navbar-nav .nav-link {
+    color: #E0FFFF;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+    color: #E0FFFF;
+}
+
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+.content-section {
+    background: #E0FFFF;
+    padding: 20px 15px;
+    border: 1px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    right: 20px;
+}
+
+.article-title {
+    color: #E0FFFF;
+}
+
+a.article-title:hover {
+    color: #E0FFFF;
+    text-decoration: none;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-img {
+    height: 100px;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.article-metadata {
+    padding-bottom: 5px;
+    margin-bottom: 4px;
+    border-bottom: 1px;
+}
+
+
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}
+.share-toggle {
+	z-index: 2;
+}
+.share-toggle:before {
+	content: "\f1e0";
+	font-family: 'FontAwesome';
+	color: #3498db;
+}
+	.share-toggle.share-expanded:before {
+		content: "\f00d";
+	}
+
+.share-icon {
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	border-radius: 50%;
+	background-color: #fff;
+	transition: all 0.3s ease;
+	outline: 0;
+
+	box-shadow:
+	  		0 2px 4px rgba(0,0,0, 0.12),
+	    	0 2px 4px rgba(0,0,0, 0.24);
+}
+	.share-icon:hover,
+	.share-icon:focus {
+		box-shadow:
+	  		0 3px 6px rgba(0,0,0, 0.12),
+	    	0 3px 6px rgba(0,0,0, 0.24);
+
+	    -webkit-transform: scale(1.2);
+	    -moz-transform: scale(1.2);
+	    -ms-transform: scale(1.2);
+	    -o-transform: scale(1.2);
+	    transform: scale(1.2);
+	}
+
+
+.facebook,
+.twitter,
+.googleplus {
+	color: #fff;
+}
+
+.home-header {
+	margin-top: 7px;
+	margin-bottom: 20px;
+}
+
+.header-text {
+	padding: 15px;
+}
+
+.status {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.line {
+	border-top: 3px double #e4e3e3;
+}

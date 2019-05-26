@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <p>
+        <iframe  frameborder="no" scrolling="no"
+                 width="280"
+                 height="150"
+                 src="https://yandex.ru/time/widget/?geoid=213&lang=ru&layout=horiz&type=analog&face=serif">
+        </iframe>
+    </p>
+    <h1>Все преподаватели:</h1>
+    {% for teacher in teachers %}
+        <div class="row" id="teacher-row-{{ teacher.id }}">
+        <article class="media content-section">
+            <div style="height: 220px; width: 220px">
+                {% if teacher.image %}
+                    <img class = "rounded-circle"
+                     width="200"
+                     height="200"
+                     border="20"
+                     src = "{{ teacher.image.url }}">
+                {% endif %}
+            </div>
+            <div class="media-body">
+                <div class="article-metadata">
+                    <text class="mr-2"><a class="article-title" href="teacher/{{ teacher.id }}/"><h2>{{ teacher.surname }} {{ teacher.name }}
+                        {{ teacher.patronymic }} </h2></a></text>
+                    <br>
+                    <h4><text class="mr-2" style="font:italic 30px bold">Преподает {{ teacher.teacher_obj }}</text></h4>
+                    <h4> Средняя оценка: {{ teacher.teacher_median_rating }}</h4>
+                    {% if teacher.kol_rating == 1 %}
+                        <h5> На основе {{ teacher.kol_rating }} оценки </h5>
+                    {% else %}
+                        <h5> На основе {{ teacher.kol_rating }} оценок </h5>
+                    {% endif %}
+                    <br>
+                    <fieldset class="form-group">
+                        {% if user.is_authenticated %}
+                            <button class="btn btn-outline-info" onclick=
+                                "location.href='/rating/{{ teacher.id }}'" name="teacher_rating">
+                                Добавить оценку о преподавателе
+                            </button>
+                            <button class="btn btn-outline-info" onclick=
+                                    "location.href='/review/{{ teacher.id }}'">
+                                    Добавить отзыв о преподавателе
+                            </button>
+                            {% if user.username == 'admin1' or user.username == 'admin2' or user.username == 'admin3'%}
+                                <button type="button" data-id="{{ teacher.id }}"class="delete_teacher btn btn-outline-danger">
+                                    Удалить учителя{% csrf_token %}
+                                </button>
+                            {% endif %}
+                        {% endif %}
+                    </fieldset>
+                </div>
+            </div>
+        </article>
+        </div>
+    {% endfor %}
+    <h3> Если Вам понравился наш сайт, Вы можете поделиться им в более чем 20 соц.сетях</h3>
+    <p>
+        <script src="https://yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+        <script src="https://yastatic.net/share2/share.js"></script>
+        <div class="ya-share2" data-services="collections,vkontakte,facebook,odnoklassniki,moimir,twitter,blogger,delicious,digg,reddit,evernote,linkedin,lj,pocket,qzone,renren,sinaWeibo,surfingbird,tencentWeibo,tumblr,viber,whatsapp,skype,telegram"></div>
+    </p>
+{% endblock %}

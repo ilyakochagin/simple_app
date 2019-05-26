@@ -1,0 +1,26 @@
+{% extends 'simple_app/base.html' %}
+
+
+{% block content %}
+    <h1>HOME</h1>
+    <h1>Все преподаватели:</h1>
+
+    {% for teacher in teachers %}
+        <div class="row" data-id="{{ teacher.id }}" data-page="home">
+        <article class="media content-section">
+          <img class = "rounded-circle article-img" src = "{{ teacher.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+                <text class="mr-2"><a class="article-title" href="teacher/{{ teacher.id }}/"><h3>{{ teacher.surname }} {{ teacher.name }}
+                    {{ teacher.patronymic }} {{ teacher.id }}</h3></a></text>
+                <br>
+                <input type="button" onclick="location.href='teacher_add_review/{{ teacher.id }}'">
+            </div>
+          </div>
+        <button type="button" class="delete btn btn-outline-danger">
+            Удалить опрос{% csrf_token %}
+        </button>
+        </article>
+        </div>
+    {% endfor %}
+{% endblock %}

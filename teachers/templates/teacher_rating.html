@@ -1,0 +1,109 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+</script>
+
+<div id="rating">
+<div class="param">Насколько понятно учитель объясняет:</div>
+<div><div class="stars"></div><p class="progress" id="p1"></p></div>
+<div class="rating" id="param1">5.0</div>
+
+<div class="param">Насколько полезны занятия с учителем:</div>
+<div><div class="stars"></div><p class="progress" id="p2"></p></div>
+<div class="rating" id="param2">5.0</div>
+
+<div class="param">Насколько требователен учитель:</div>
+<div><div class="stars"></div><p class="progress" id="p3"></p></div>
+<div class="rating" id="param3">5.0</div>
+
+
+<div class="param">Общая оценка:</div>
+<div><div id="sum_stars"></div><p id="sum_progress"></p></div>
+<div id="summ">5.00</div>
+
+<input id="el_999" type="submit" value="Сохранить!">
+<p id="message"></p>
+</div>
+
+<style type="text/css">
+    #rating {
+    width: 500px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px #333333;
+    margin: 0px auto;
+    padding: 10px;
+    text-align: center;
+}
+#rating div { float: left; }
+#rating p { margin: 0; padding: 0; }
+.param {
+    width: 300px;
+    margin: 0 20px 0 0;
+    text-align: right;
+}
+.param, .rating, #summ { line-height: 28px; }
+.stars, #sum_stars { background: url({{ image_stars }}); }
+.stars, #sum_stars, .progress, #sum_progress {
+    width: 130px;
+    height: 28px;
+    cursor: pointer;
+}
+.progress { background: #FFEE00; }
+#sum_progress { background: #00EE00; }
+.rating, #summ {
+    margin: 0 0 0 20px;
+    font-weight: bold;
+}
+</style>
+
+<script>
+    $(document).ready(function(){
+ function move(e, obj){
+    var summ=0;
+    var id = obj.next().attr('id').substr(1);
+    var progress = e.pageX - obj.offset().left;
+    var rating = progress * 5 / $('.stars').width();
+    $('#param'+id).text(rating.toFixed(1));
+    obj.next().width(progress);
+    $('.rating').each(function(){ summ += parseFloat($(this).text()); });
+    summ = summ / $('.rating').length;
+    $('#sum_progress').width(Math.round($('.stars').width() * summ / 5));
+    $('#summ').text(summ.toFixed(2));
+ }
+
+ $('#rating .stars').click(function(e){
+    $(this).toggleClass('fixed');
+    move(e, $(this));
+ });
+
+ $('#rating .stars').on('mousemove', function(e){
+    if ($(this).hasClass('fixed')==false) move(e, $(this));
+ });
+
+ $('#rating [type=submit]').click(function(){
+    var summ = parseFloat($('#summ').text()),
+        param1 = parseFloat($('#param1').text()),
+        param2 = parseFloat($('#param2').text()),
+        param3 = parseFloat($('#param3').text());
+    var el = document.location.pathname;
+    var num = parseInt(el.match(/\d+/));
+    console.log(num);
+    $.post({
+        url: '/rating/change',
+        type: 'POST',
+        data: {
+            'param1': param1,
+            'param2': param2,
+            'param3': param3,
+            'rating': summ,
+            'teacher_id': num.toString(),
+            'csrfmiddlewaretoken': '{{ csrf_token }}',
+            processData: false,
+            contentType: false
+        },
+         success: function (json) {
+            $(location).attr('href', '/');
+        },
+    });
+ });
+});
+</script>

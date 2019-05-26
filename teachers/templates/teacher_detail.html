@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class="row" id="{{ teacher.id }}">
+        <div class="col rounded" >
+            <div id="alert_placeholder">
+            </div>
+                <article class="media content-section rounded">
+                    <img class="rounded-circle article-img" src="{{ teacher.image.url }}">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <h1> Преподаватель {{ teacher.surname }}
+                            {{ teacher.name }}
+                            {{ teacher.patronymic }}</h1>
+                        </div>
+                    </div>
+                </article>
+
+        </div>
+    </div>
+    <h1>Отзывы о преподавателе</h1>
+    {% for rev in review %}
+        {% if rev.teacher_id == teacher.id %}
+            <div class="row" id="review-row-{{ rev.id }}">
+                <div class="media-body">
+                    <h2>Автор отзыва <text class="mr-2" style="font:italic 40px bold">{{ rev.author_name }}</text></h2>
+                    <h3>Текст отзыва</h3>
+                    <h3><text class="mr-2" style="font:italic 30px bold">{{ rev.text }}</text></h3>
+                    {% if user.username == 'admin1' or user.username == 'admin2' or user.username == 'admin3' %}
+                        <button type="button" data-id="{{ rev.id }}"class="delete_review btn btn-outline-danger">
+                            Удалить отзыв{% csrf_token %}
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}

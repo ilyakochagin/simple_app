@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> Мои жалобы </h1>
+    {% for complaint in complaints %}
+        {% if complaint.author_name == request.user %}
+            <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                      <small class="text-muted">Время подачи жалобы {{ complaint.date }}</small>
+                        <h2><text class="mr-2" style="font:italic 50px bold"> Тема жалобы </text></h2>
+                        <h2><text class="mr-2">{{ complaint.title }}</text></h2>
+                        <h4><text class="mr-2" style="font:italic 30px bold"> Текст жалобы </text></h4>
+                        <h4><text class="mr-2" >{{ complaint.text }}</text></h4>
+                </div>
+            </div>
+            </article>
+            <br>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

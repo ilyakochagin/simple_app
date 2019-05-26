@@ -1,0 +1,80 @@
+body {
+    background: #E0FFFF;
+    color: #000000;
+    margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #000;
+}
+
+ul {
+    margin: 0;
+}
+
+.bg-steel {
+    background-color: #000000;
+}
+
+.site-header .navbar-nav .nav-link {
+    color: #E0FFFF;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+    color: #E0FFFF;
+}
+
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+}
+
+.content-section {
+    background: #E0FFFF;
+    padding: 20px 15px;
+    border: 1px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.article-title {
+    color: #E0FFFF;
+}
+
+a.article-title:hover {
+    color: #E0FFFF;
+    text-decoration: none;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+}
+
+.article-metadata {
+    padding-bottom: 5px;
+    margin-bottom: 4px;
+    border-bottom: 1px;
+}
+
+
+.article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}

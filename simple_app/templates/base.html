@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+
+    {% if title %}
+        <title>MSHP Teachers</title>
+    {% else %}
+        <title> MSHP Teachers </title>
+    {% endif %}
+
+</head>
+<body>
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand mr-4" href="/">MSHP Teachers</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="/about">О нас</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="/my_complaints">Мои жалобы</a>
+                    <a class = "nav-item nav-link" href="/new_teacher"> Новый учитель </a>
+                {% endif %}
+                {% if user.username == 'admin1' or user.username == 'admin2' or user.username == 'admin3'%}
+                    <a class = "nav-item nav-link" href="/all_complaints"> Все жалобы</a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a class = "nav-item nav-link" href="/complaint">Новая жалоба</a>
+                    <a class = "nav-item nav-link" href="/profile">Профиль</a>
+                    <a class="nav-item nav-link" href="/logout">Выйти</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="/login">Войти</a>
+                    <a class="nav-item nav-link" href="/register">Зарегистрироваться</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Статистика</h3>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-light">Добавлено учителей: {{ total_teachers }}</li>
+                    <li class="list-group-item list-group-item-light">Оставлено оценок: {{ total_rating }}</li>
+                    <li class="list-group-item list-group-item-light">Оставлено отзывов: {{ total_reviews }}</li>
+                    <li class="list-group-item list-group-item-light">Всего пользователей: {{ total_users }}</li>
+                    {% if total_teachers > 0 %}
+                        <li class="list-group-item list-group-item-light">
+                            <a href="/teacher/{{ most_popular }}">Самый популярный учитель</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="/static/home.js?sd"></script>
+
+
+</body>
+</html>

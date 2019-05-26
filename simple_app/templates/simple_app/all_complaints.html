@@ -1,0 +1,34 @@
+{% extends 'simple_app/base.html' %}
+{% block content %}
+    {% if user.username != 'admin1' and user.username != 'admin2' and user.username != 'admin3'%}
+        <meta http-equiv="refresh" content="0; url=/">
+    {% endif %}
+    <h1>Все жалобы:</h1>
+    {% for complaint in complaints %}
+        <article class="media content-section">
+          <img class = "rounded-circle article-img" src = "{{ complaint.author_name.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <text class="mr-2">Автор {{ complaint.author_name }}</text>
+              <small class="text-muted">Время подачи жалобы {{ complaint.date }}</small>
+            </div>
+              <h2><text class="mr-2"> Тема жалобы </text></h2>
+              <h2><text class="mr-2">{{ complaint.title }}</text></h2>
+              <h4><text class="mr-2"> Текст жалобы </text></h4>
+              <h4><text class="mr-2">{{ complaint.text }}</text></h4>
+              <h4><text class="mr-2">{{ complaint.id }}</text></h4>
+              <div class="row" id="{{ complaint.id }}">
+                <hr class="line">
+                <div class="manage-section text-center">
+                    <div class="btn-group btn-group-toggle">
+                        <button type="button" data-id="{{ complaint.id }}" onclick="delete_complaint()"
+                                data-page="all_complaints"
+                                class="delete btn btn-outline-danger">Удалить
+                            жалобу{% csrf_token %}</button>
+                    </div>
+                </div>
+              </div>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock %}

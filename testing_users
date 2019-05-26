@@ -1,0 +1,19 @@
+username: test1
+email: test1@ya.ru
+password: sdfhjdjkwds
+
+username: admin
+email: admin@ya.ru
+password:
+
+superuser: admin1
+email: admin1@ya.ru
+password: sudhsfdsdf
+
+superuser: admin2
+email: admin2@ya.ru
+password: sudhsfdsdf
+
+superuser: admin3
+email: admin3@ya.ru
+password: sudhsfdsdf
